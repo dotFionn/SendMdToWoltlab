@@ -36,3 +36,7 @@ inputs:
     description: 'path to prepend for staging'
     required: false
     default: '/staging'
+  dateformat:
+    description: 'format on how to display date'
+    required: false
+    default: 'YYYY-MM-DD  HH:mm:ss'

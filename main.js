@@ -6,8 +6,19 @@ const fs = require('fs');
 const path = require('path');
 const mysql = require('mysql');
 
-const { INPUT_DBHOST, INPUT_DBPORT, INPUT_DBUSER, INPUT_DBPASS, INPUT_DBNAME, INPUT_WBBTABLEID, INPUT_STAGINGBRANCH, INPUT_STAGINGPATH } =
-  process.env;
+const dayjs = require('dayjs');
+
+const {
+  INPUT_DBHOST,
+  INPUT_DBPORT,
+  INPUT_DBUSER,
+  INPUT_DBPASS,
+  INPUT_DBNAME,
+  INPUT_WBBTABLEID,
+  INPUT_STAGINGBRANCH,
+  INPUT_STAGINGPATH,
+  INPUT_DATEFORMAT,
+} = process.env;
 
 console.log(
   Buffer.from(JSON.stringify({ INPUT_DBHOST, INPUT_DBPORT, INPUT_DBUSER, INPUT_DBPASS, INPUT_DBNAME, INPUT_WBBTABLEID }, undefined, 2)).toString(
@@ -69,8 +80,13 @@ function readDir(dir) {
 }
 
 const frameFileContent = fs.readFileSync(path.join(cwd, 'meta', 'frame.html')).toString();
+
 function createFrame(content) {
   return frameFileContent.replace('{{content}}', content);
+}
+
+function setChangedTimestamp(content) {
+  return content.replace('{{changeddate}}', dayjs().format(INPUT_DATEFORMAT));
 }
 
 const allFiles = readDir(contentDir);
@@ -169,7 +185,7 @@ mdFiles.forEach((file) => {
   const headline = regexRes[1];
 
   const webPath = file.replace(contentDir, '').replace('.md', '').replace(/\\/gi, '/').replace('/README', '');
-  const text = createFrame(renderedSplit.join('\n'));
+  const text = createFrame(setChangedTimestamp(renderedSplit.join('\n')));
 
   console.log(JSON.stringify({ webPath, headline }, undefined, 2));
 
