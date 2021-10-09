@@ -28,3 +28,11 @@ inputs:
     description: 'WBB Table Id'
     required: true
     default: '1'
+  stagingbranch:
+    description: 'branch to use for staging'
+    required: false
+    default: 'dev'
+  stagingpath:
+    description: 'path to prepend for staging'
+    required: false
+    default: '/staging'

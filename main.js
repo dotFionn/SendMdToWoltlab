@@ -6,7 +6,8 @@ const fs = require('fs');
 const path = require('path');
 const mysql = require('mysql');
 
-const { INPUT_DBHOST, INPUT_DBPORT, INPUT_DBUSER, INPUT_DBPASS, INPUT_DBNAME, INPUT_WBBTABLEID } = process.env;
+const { INPUT_DBHOST, INPUT_DBPORT, INPUT_DBUSER, INPUT_DBPASS, INPUT_DBNAME, INPUT_WBBTABLEID, INPUT_STAGINGBRANCH, INPUT_STAGINGPATH } =
+  process.env;
 
 console.log(
   Buffer.from(JSON.stringify({ INPUT_DBHOST, INPUT_DBPORT, INPUT_DBUSER, INPUT_DBPASS, INPUT_DBNAME, INPUT_WBBTABLEID }, undefined, 2)).toString(
@@ -77,7 +78,6 @@ const allFiles = readDir(contentDir);
 const mdFiles = allFiles.filter((file) => ['.md'].includes(path.extname(file)));
 
 const pagesNotFound = [];
-const workPromises = [];
 
 const dbPrefix = (table) => `${table}${INPUT_WBBTABLEID}`;
 
@@ -135,7 +135,7 @@ function writePage(url, title, content) {
 }
 
 async function doWork(url, title, content) {
-  url = `${process.env.BRANCH == 'main' ? '' : '/staging'}${url}`;
+  url = `${process.env.BRANCH == INPUT_STAGINGBRANCH ? INPUT_STAGINGPATH : ''}${url}`;
 
   console.log('checking if file exists:', url);
 
