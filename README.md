@@ -34,24 +34,58 @@ This action required multiple inputs:
 
 ### `dbhost`
 
-The hostname or IP-Address of your database server
+The hostname or IP-Address of your database server.
+
+This input is required.
 
 ### `dbport`
 
-The port of your database server
+The port of your database server.
+
+This input is required.
 
 ### `dbuser`
 
 The username of your database server. It must have access to the woltlab suite database.
 
+This input is required.
+
 ### `dbpass`
 
-The passwort for the given user
+The passwort for the given user.
+
+This input is required.
 
 ### `dbname`
 
-The name of your woltlab suite database
+The name of your woltlab suite database.
+
+This input is required.
 
 ### `wbbtableid`
 
-Your woltlab installation id
+Your woltlab installation id.
+
+This input is not required.
+The default value is `1`.
+
+### `stagingbranch`
+
+The branch that is supposed to be used for staging.
+
+This input is not required.
+The default value is `dev`.
+
+### `stagingpath`
+
+The path to be prepended before the files for staging.
+
+This input is not required.
+The default value is `/staging`.
+
+### `dateformat`
+
+How the date of deployment is supposed to be formatted. See [dayjs documentation](https://day.js.org/docs/en/display/format)
+
+This input is not required.
+The default value is `YYYY-MM-DD HH:mm:ss`.
