@@ -167,7 +167,7 @@ async function doWork(url, title, content) {
     }
   } else {
     console.log('file does not exist:', url);
-    pagesNotFound.push(webPath);
+    pagesNotFound.push(url);
   }
 }
 
