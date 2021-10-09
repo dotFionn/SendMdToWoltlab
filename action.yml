@@ -1,0 +1,30 @@
+name: Compile markdown and write into Woltlab Forum pages
+description: ''
+runs:
+  using: docker
+  image: Dockerfile
+inputs:
+  dbhost:
+    description: 'Database host'
+    required: true
+    default: ''
+  dbport:
+    description: 'Database port'
+    required: false
+    default: '3306'
+  dbuser:
+    description: 'Database user'
+    required: true
+    default: ''
+  dbpass:
+    description: 'Database password'
+    required: true
+    default: ''
+  dbname:
+    description: 'Database name'
+    required: true
+    default: ''
+  wbbtableid:
+    description: 'WBB Table Id'
+    required: true
+    default: '1'
