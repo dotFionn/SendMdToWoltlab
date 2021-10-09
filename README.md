@@ -89,3 +89,10 @@ How the date of deployment is supposed to be formatted. See [dayjs documentation
 
 This input is not required.
 The default value is `YYYY-MM-DD HH:mm:ss`.
+
+### `timezone`
+
+The timezone to be used for displaying the date of deployment. See [dayjs documentation](https://day.js.org/docs/en/plugin/timezone)
+
+This input is not required.
+The default value is `UTC`.

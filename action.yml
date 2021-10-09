@@ -39,4 +39,8 @@ inputs:
   dateformat:
     description: 'format on how to display date'
     required: false
-    default: 'YYYY-MM-DD  HH:mm:ss'
+    default: 'YYYY-MM-DD HH:mm:ss'
+  timezone:
+    description: 'timezone for displaying time'
+    required: false
+    default: 'UTC'

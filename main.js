@@ -7,6 +7,11 @@ const path = require('path');
 const mysql = require('mysql');
 
 const dayjs = require('dayjs');
+const dayjs_utc = require('dayjs/plugin/utc');
+const dayjs_timezone = require('dayjs/plugin/timezone');
+
+dayjs.extend(dayjs_utc);
+dayjs.extend(dayjs_timezone);
 
 const {
   INPUT_DBHOST,
@@ -18,13 +23,8 @@ const {
   INPUT_STAGINGBRANCH,
   INPUT_STAGINGPATH,
   INPUT_DATEFORMAT,
+  INPUT_TIMEZONE,
 } = process.env;
-
-console.log(
-  Buffer.from(JSON.stringify({ INPUT_DBHOST, INPUT_DBPORT, INPUT_DBUSER, INPUT_DBPASS, INPUT_DBNAME, INPUT_WBBTABLEID }, undefined, 2)).toString(
-    'base64'
-  )
-);
 
 const md = require('markdown-it')({
   html: true, // Enable HTML tags in source
@@ -86,7 +86,7 @@ function createFrame(content) {
 }
 
 function setChangedTimestamp(content) {
-  return content.replace('{{changeddate}}', dayjs().format(INPUT_DATEFORMAT));
+  return content.replace('{{changeddate}}', dayjs().tz(INPUT_TIMEZONE).format(INPUT_DATEFORMAT));
 }
 
 const allFiles = readDir(contentDir);
