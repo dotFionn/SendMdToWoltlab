@@ -11,7 +11,7 @@
   "license": "ISC",
   "dependencies": {
     "dayjs": "^1.10.7",
-    "markdown-it": "^12.2.0",
+    "markdown-it": "^12.3.2",
     "mysql": "^2.18.1"
   }
 }
